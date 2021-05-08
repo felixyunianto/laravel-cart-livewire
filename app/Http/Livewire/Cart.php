@@ -8,13 +8,26 @@ use Darryldecode\Cart\CartCondition;
 use Cart as ShoppingCart;
 use Carbon\Carbon;
 
+use Livewire\WithPagination;
+
 class Cart extends Component
 {
+    use WithPagination;
+
+    protected $paginationTheme = 'bootstrap';
+
     public $tax = '0%';
 
+    public $search = '';
+
+    public function updatingSearch(){
+        $this->resetPage();
+    }
+
     public function render()
-    {
-        $products = ProductModel::orderBy('created_at', 'DESC')->get();
+    {        
+        $products = ProductModel::where('name', 'like', '%'.$this->search.'%')->orderBy('created_at', 'DESC')->paginate(4);
+
 
         $condition = new CartCondition([
             'name' => 'pajak',

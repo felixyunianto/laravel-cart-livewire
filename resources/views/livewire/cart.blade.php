@@ -2,7 +2,12 @@
     <div class="col-md-7">
         <div class="card">
             <div class="card-body">
-                <h2 class="font-weight-bold">Product List</h2>
+                <div class="d-flex justify-content-between mb-2">
+                    <h2 class="font-weight-bold">Product List</h2>
+                    <div class="">
+                        <input wire:model="search" type="text" placeholder="Search Product..." class="form-control">
+                    </div>
+                </div>
                 <div class="row">
                     @foreach ($products as $product)
                         <div class="col-md-3 mb-3">
@@ -19,6 +24,9 @@
                             </div>
                         </div>
                     @endforeach
+                </div>
+                <div class="d-flex justify-content-center">
+                    {{$products->links()}}
                 </div>
             </div>
         </div>
